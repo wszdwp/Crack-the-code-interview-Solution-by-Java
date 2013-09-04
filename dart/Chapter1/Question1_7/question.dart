@@ -1,6 +1,11 @@
 /*
  * Write an algorithm such that if an element in an MxN matrix is 0,
  * its entire row and column are set to 0.
+ *output: 
+ *1004
+ *0000
+ *0000
+ *1004
  */
 import java.util.Arrays;
 
