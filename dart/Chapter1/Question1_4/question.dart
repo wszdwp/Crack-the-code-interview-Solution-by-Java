@@ -7,45 +7,59 @@
  * perform this operation in place.)
  *
  * EXAMPLE
- * Input: "Mr John Smith"
- * Output: "Mr%20John%20Smith"
+ * Input1: 'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', ' ', '!'
+ * Input2: "This is a test case2!"
+ * Output: 
+ *This%20is%20a%20test%20!
+ *This%20is%20a%20test%20case2!
+ *This20%is20%a20%test20%case2!"Mr%20John%20Smith"
  */
 
-replaceSpaces(List<String> str, int length) {
-  int spaceCount = 0;
-  int index;
-  int i = 0;
+public class QuestionSolu {
+	
+	public static void main (String[] args)
+	{
+		 char[] str = {'T', 'h', 'i', 's', ' ', 'i', 's', ' ', 'a', ' ', 't', 'e', 's', 't', ' ', '!'};
+		 String str2 = "This is a test case2!";
+		 	 
+		 System.out.println(replaceSpace(str));
+		 System.out.println(replaceSpace(str2.toCharArray()));
+		 System.out.println(str2.replaceAll(" ", "20%"));
+	}
 
-  for (i = 0; i < length; i++) {
-    if (str[i] == ' ') {
-      spaceCount++;
-    }
-  }
-
-  index = length + spaceCount * 2;
-
-  for (i = length - 1; i >= 0; i--) {
-    if (str[i] == ' ') {
-      str[index - 1] = '0';
-      str[index - 2] = '2';
-      str[index - 3] = '%';
-      index = index - 3;
-    } else {
-      str[index - 1] = str[i];
-      index--;
-    }
-  }
-}
-
-void main() {
-  String str = "abc d e f";
-  // Removed +1 from [arr] since we dont need null terminating strings here.
-  List<String> arr = new List<String>(str.length + 3 * 2);
-
-  for (int i = 0; i < str.length; i++) {
-    arr[i] = str[i];
-  }
-
-  replaceSpaces(arr, str.length);
-  print('"${arr.join()}"');
-}
+	public static char[] replaceSpace(char[] str)
+	{
+		int numOfSpace = 0;
+		for(int i = 0; i < str.length; i++)
+		{
+			if(str[i] == ' ')
+			{
+				numOfSpace++;
+			}
+		}
+		int newStrLength = numOfSpace * 2 + str.length;
+		char[] replacedStr = new char[newStrLength];
+		//replacedStr[newStrLength] = '\0'; this line will cause IndexOutOfbound
+		newStrLength--;
+		for(int i = str.length - 1; i >= 0; i--)
+		{
+			if(str[i] == ' ')
+			{
+				replacedStr[newStrLength] = '0';
+				replacedStr[newStrLength - 1] = '2';
+				replacedStr[newStrLength - 2] = '%';
+				newStrLength = newStrLength - 3;
+				
+			}
+			else
+			{
+				replacedStr[newStrLength] = str[i];
+				newStrLength = newStrLength - 1;
+			}
+		}
+		
+		return replacedStr;
+		
+	}
+	
+} 
