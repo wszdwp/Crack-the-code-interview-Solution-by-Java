@@ -2,43 +2,69 @@
  * Write an algorithm such that if an element in an MxN matrix is 0,
  * its entire row and column are set to 0.
  */
-import '../../utils/assorted_methods.dart';
-void setZeros(List<List<int>> matrix) {
-  List<bool> row = new List<bool>(matrix.length);
-  List<bool> column = new List<bool>(matrix[0].length);
+import java.util.Arrays;
 
-  // Dart does not default to false.
-  for (int i = 0; i < row.length; i++) {
-    row[i] = false;
-  }
-  for (int i = 0; i < column.length; i++) {
-    column[i] = false;
-  }
 
-  // Store the row and column index with value 0
-  for (int i = 0; i < matrix.length; i++) {
-    for (int j = 0; j < matrix[0].length; j++) {
-      if (matrix[i][j] == 0) {
-        row[i] = true;
-        column[j] = true;
-      }
-    }
-  }
+public class QuestionSolu {
+	
+	public static void main (String[] args)
+	{
+		 int[][] matrix = { {1, 2, 3, 4},
+						 	{1, 0, 3, 4},
+						 	{1, 2, 0, 4}, 
+						 	{1, 2, 3, 4}
+						 		};
+		 	 
+		 setZeros(matrix);
+		 int num = 0;
+		 for(int i = 0; i < matrix.length; i++)
+			{
+				for(int j = 0; j < matrix[0].length; j++)
+				{	
+					System.out.print(matrix[i][j]);
+					num++;
+					if(num == matrix[0].length)
+					{
+						System.out.println();
+						num = 0;
+					}
+				}
+			}
+	}
 
-  // Set arr[i][j] to 0 if either row i or column j has a 0
-  for (int i = 0; i < matrix.length; i++) {
-    for (int j = 0; j < matrix[0].length; j++) {
-      if (row[i] || column[j]) {
-        matrix[i][j] = 0;
-      }
-    }
-  }
-}
+	public static void setZeros(int[][] matrix) 
+	{
+		int[] row = new int[matrix.length];
+		int[] column = new int[matrix[0].length];
+		//Store index that row or column contain 0s
+		for(int i = 0; i < matrix.length; i++)
+		{
+			for(int j = 0; j < matrix[0].length; j++)
+			{
+				if(matrix[i][j] == 0)
+					{
+						row[i] = 1;
+						column[j] = 1;
+					}
+			}
+			
+		}
+		//set to zero
+		for(int i = 0; i < matrix.length; i++)
+		{
+			for(int j = 0; j < matrix[0].length; j++)
+			{
+				if(row[i] == 1 || column[j] == 1)
+					{ 
+						matrix[i][j] = 0;
+						
+					}
+			}
+			
+		}
+		
+	}
+	
+} 
 
-void main() {
-  List<List<int>> matrix = randomMatrix(3, 5, 0, 5);
-  printIntMatrix(matrix);
-  setZeros(matrix);
-  print("\n");
-  printIntMatrix(matrix);
-}
+	
